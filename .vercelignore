@@ -1,0 +1,10 @@
+01 Source/
+.vinext/
+.wrangler/
+db/
+dist/
+drizzle/
+examples/
+work/
+worker/
+*.tsbuildinfo
