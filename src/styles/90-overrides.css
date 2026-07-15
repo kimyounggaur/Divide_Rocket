@@ -1,0 +1,7 @@
+/**
+ * Temporary compatibility patches belong in this layer during migration only.
+ * The foundation intentionally starts with no overrides.
+ */
+@layer overrides {
+  /* Intentionally empty. */
+}

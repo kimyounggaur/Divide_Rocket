@@ -1,0 +1,196 @@
+@layer base {
+  :where(*, *::before, *::after) {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-block-size: 100%;
+    background: var(--color-canvas);
+    color: var(--color-ink-strong);
+    font-family: var(--font-sans);
+    scroll-behavior: var(--scroll-behavior);
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-block-size: 100vh;
+    min-block-size: 100svh;
+    min-block-size: 100dvh;
+    margin: 0;
+    overflow-x: clip;
+    background: var(--color-canvas);
+    color: var(--color-ink-strong);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :where(button, input, select, textarea) {
+    margin: 0;
+    color: inherit;
+    font: inherit;
+  }
+
+  :where(button, input[type="button"], input[type="reset"], input[type="submit"], [role="button"]) {
+    min-block-size: var(--control-md);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  :where(button:not(:disabled), [role="button"]:not([aria-disabled="true"])) {
+    cursor: pointer;
+  }
+
+  :where(:disabled, [aria-disabled="true"]) {
+    cursor: not-allowed;
+  }
+
+  :where(img, picture, svg, canvas, video) {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  :where(h1, h2, h3, h4, p, figure, blockquote, dl, dd) {
+    margin: 0;
+  }
+
+  :where(ul, ol) {
+    margin-block: 0;
+  }
+
+  :where(a) {
+    color: inherit;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  :where(audio) {
+    inline-size: 100%;
+  }
+
+  :where([hidden]) {
+    display: none;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: var(--color-selection);
+    color: var(--color-ink-strong);
+  }
+
+  .fx-decorative-loop {
+    animation-play-state: var(--motion-loop-play-state);
+  }
+
+  [data-motion="full"] {
+    --motion-active-instant: var(--motion-instant);
+    --motion-active-fast: var(--motion-fast);
+    --motion-active-normal: var(--motion-normal);
+    --motion-active-slow: var(--motion-slow);
+    --motion-active-scene: var(--motion-scene);
+    --motion-active-loop-short: var(--motion-loop-short);
+    --motion-active-loop-long: var(--motion-loop-long);
+    --motion-active-distance-xs: var(--distance-xs);
+    --motion-active-distance-sm: var(--distance-sm);
+    --motion-active-distance-md: var(--distance-md);
+    --motion-active-distance-lg: var(--distance-lg);
+    --motion-loop-play-state: running;
+    --motion-particle-density: 1;
+    --motion-shake-distance: var(--distance-sm);
+    --scroll-behavior: smooth;
+  }
+
+  [data-motion="reduced"] {
+    --motion-active-instant: var(--motion-instant);
+    --motion-active-fast: var(--motion-fast);
+    --motion-active-normal: var(--motion-normal);
+    --motion-active-slow: var(--motion-slow);
+    --motion-active-scene: var(--motion-slow);
+    --motion-active-loop-short: var(--motion-loop-long);
+    --motion-active-loop-long: 9s;
+    --motion-active-distance-xs: 1px;
+    --motion-active-distance-sm: 2px;
+    --motion-active-distance-md: 5px;
+    --motion-active-distance-lg: 10px;
+    --motion-loop-play-state: running;
+    --motion-particle-density: 0.4;
+    --motion-shake-distance: 0px;
+    --scroll-behavior: auto;
+  }
+
+  [data-motion="minimal"] {
+    --motion-active-instant: var(--motion-instant);
+    --motion-active-fast: var(--motion-fast);
+    --motion-active-normal: var(--motion-fast);
+    --motion-active-slow: var(--motion-fast);
+    --motion-active-scene: var(--motion-fast);
+    --motion-active-loop-short: var(--motion-loop-long);
+    --motion-active-loop-long: var(--motion-loop-long);
+    --motion-active-distance-xs: 0px;
+    --motion-active-distance-sm: 0px;
+    --motion-active-distance-md: 0px;
+    --motion-active-distance-lg: 0px;
+    --motion-loop-play-state: paused;
+    --motion-particle-density: 0;
+    --motion-shake-distance: 0px;
+    --scroll-behavior: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-motion]) {
+      --motion-active-instant: var(--motion-instant);
+      --motion-active-fast: var(--motion-fast);
+      --motion-active-normal: var(--motion-fast);
+      --motion-active-slow: var(--motion-fast);
+      --motion-active-scene: var(--motion-fast);
+      --motion-active-loop-short: var(--motion-loop-long);
+      --motion-active-loop-long: var(--motion-loop-long);
+      --motion-active-distance-xs: 0px;
+      --motion-active-distance-sm: 0px;
+      --motion-active-distance-md: 0px;
+      --motion-active-distance-lg: 0px;
+      --motion-loop-play-state: paused;
+      --motion-particle-density: 0;
+      --motion-shake-distance: 0px;
+      --scroll-behavior: auto;
+    }
+
+    [data-motion="system"] {
+      --motion-active-instant: var(--motion-instant);
+      --motion-active-fast: var(--motion-fast);
+      --motion-active-normal: var(--motion-fast);
+      --motion-active-slow: var(--motion-fast);
+      --motion-active-scene: var(--motion-fast);
+      --motion-active-distance-xs: 0px;
+      --motion-active-distance-sm: 0px;
+      --motion-active-distance-md: 0px;
+      --motion-active-distance-lg: 0px;
+      --motion-loop-play-state: paused;
+      --motion-particle-density: 0;
+      --motion-shake-distance: 0px;
+      --scroll-behavior: auto;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    :root {
+      --border-width: 2px;
+      --border-width-strong: 3px;
+      --focus-ring-width: 4px;
+      --focus-ring-offset: 2px;
+    }
+  }
+}

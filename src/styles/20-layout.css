@@ -1,0 +1,173 @@
+@layer layout {
+  :where(.l-app, .game-app) {
+    display: grid;
+    min-block-size: 100vh;
+    min-block-size: 100svh;
+    min-block-size: 100dvh;
+    overflow: clip;
+    background: var(--color-canvas);
+    place-items: stretch center;
+  }
+
+  :where(.l-safe-area, .safe-area) {
+    padding-block-start: max(var(--space-2), var(--safe-area-top));
+    padding-block-end: max(var(--space-2), var(--safe-area-bottom));
+    padding-inline-start: max(var(--space-2), var(--safe-area-left));
+    padding-inline-end: max(var(--space-2), var(--safe-area-right));
+  }
+
+  :where(.l-game-shell, .game-shell) {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+      "hud"
+      "stage"
+      "controls";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows:
+      minmax(var(--hud-min-block-size), auto)
+      minmax(0, 1fr)
+      minmax(var(--control-deck-min-block-size), auto);
+    inline-size: min(100%, var(--shell-max-inline-size));
+    min-block-size: 100vh;
+    min-block-size: 100svh;
+    min-block-size: 100dvh;
+    margin-inline: auto;
+    overflow: clip;
+    isolation: isolate;
+    background: var(--theme-surface, var(--color-stage));
+    color: var(--theme-ink, var(--color-ink-strong));
+  }
+
+  :where(.l-game-shell__hud, .game-shell__hud) {
+    position: relative;
+    z-index: var(--z-hud);
+    grid-area: hud;
+    display: grid;
+    min-block-size: calc(var(--hud-min-block-size) + var(--safe-area-top));
+    padding-block-start: max(var(--space-2), var(--safe-area-top));
+    padding-block-end: var(--space-2);
+    padding-inline-start: max(var(--shell-gutter), var(--safe-area-left));
+    padding-inline-end: max(var(--shell-gutter), var(--safe-area-right));
+    align-items: center;
+  }
+
+  :where(.l-game-shell__stage, .game-shell__stage) {
+    position: relative;
+    z-index: var(--z-world-overlay);
+    grid-area: stage;
+    display: grid;
+    min-inline-size: 0;
+    min-block-size: 0;
+    overflow: clip;
+    place-items: center;
+    container-type: size;
+  }
+
+  :where(.l-game-shell__viewport, .game-shell__viewport) {
+    position: relative;
+    display: grid;
+    inline-size: 100%;
+    block-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 0;
+    overflow: clip;
+    place-items: center;
+  }
+
+  :where(.l-game-shell__canvas, .game-shell__canvas) {
+    z-index: var(--z-canvas);
+    inline-size: auto;
+    block-size: 100%;
+    max-inline-size: 100%;
+    max-block-size: 100%;
+    aspect-ratio: var(--game-aspect-ratio);
+    object-fit: contain;
+    touch-action: none;
+  }
+
+  :where(.l-game-shell__controls, .game-shell__controls) {
+    position: relative;
+    z-index: var(--z-controls);
+    grid-area: controls;
+    display: grid;
+    min-block-size: calc(var(--control-deck-min-block-size) + var(--safe-area-bottom));
+    padding-block-start: var(--space-3);
+    padding-block-end: max(var(--space-3), var(--safe-area-bottom));
+    padding-inline-start: max(var(--shell-gutter), var(--safe-area-left));
+    padding-inline-end: max(var(--shell-gutter), var(--safe-area-right));
+    align-content: end;
+  }
+
+  .l-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, var(--space-4));
+  }
+
+  .l-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-gap, var(--space-3));
+    align-items: center;
+  }
+
+  .l-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 12rem)), 1fr));
+    gap: var(--grid-gap, var(--space-4));
+  }
+
+  .l-center {
+    inline-size: min(100% - (var(--shell-gutter) * 2), var(--shell-max-inline-size));
+    margin-inline: auto;
+  }
+
+  .l-scroll-region {
+    min-block-size: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  @media (min-width: 48rem) {
+    :where(.l-app, .game-app) {
+      padding: var(--space-6);
+      place-items: center;
+    }
+
+    :where(.l-game-shell, .game-shell) {
+      max-block-size: var(--shell-tablet-max-block-size);
+      min-block-size: min(100dvh, var(--shell-tablet-max-block-size));
+      border: var(--border-width) solid var(--theme-outline, var(--color-outline));
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-3);
+    }
+  }
+
+  @media (orientation: landscape) and (min-width: 40rem) {
+    :where(.l-app, .game-app) {
+      padding-block: var(--space-2);
+      padding-inline: var(--space-4);
+    }
+
+    :where(.l-game-shell, .game-shell) {
+      grid-template-areas:
+        "stage hud"
+        "stage controls";
+      grid-template-columns: minmax(0, 65fr) minmax(16rem, 35fr);
+      grid-template-rows: minmax(var(--hud-min-block-size), auto) minmax(0, 1fr);
+      min-block-size: calc(100dvh - (var(--space-2) * 2));
+    }
+
+    :where(.l-game-shell__hud, .game-shell__hud) {
+      padding-block-start: max(var(--space-2), var(--safe-area-top));
+      padding-inline-end: max(var(--space-3), var(--safe-area-right));
+    }
+
+    :where(.l-game-shell__controls, .game-shell__controls) {
+      min-block-size: 0;
+      padding-inline-end: max(var(--space-3), var(--safe-area-right));
+    }
+  }
+}

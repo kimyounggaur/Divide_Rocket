@@ -1,0 +1,215 @@
+@layer reset, tokens, base, layout, components, pages, utilities, overrides;
+
+@layer tokens {
+  :root {
+    color-scheme: light;
+
+    /* Korean-first system typography */
+    --font-sans:
+      "Pretendard Variable", "Pretendard", "Noto Sans KR",
+      "Apple SD Gothic Neo", "Malgun Gothic", system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-music: "Bravura", "Noto Music", serif;
+
+    --font-size-display: 2rem;
+    --font-size-title-1: 1.625rem;
+    --font-size-title-2: 1.3125rem;
+    --font-size-body-large: 1.125rem;
+    --font-size-body: 1rem;
+    --font-size-label: 0.875rem;
+    --font-size-caption: 0.75rem;
+    --font-size-score: 1.75rem;
+
+    --line-height-display: 1.15;
+    --line-height-title-1: 1.2;
+    --line-height-title-2: 1.25;
+    --line-height-body-large: 1.45;
+    --line-height-body: 1.5;
+    --line-height-label: 1.35;
+    --line-height-caption: 1.4;
+    --line-height-score: 1;
+
+    --font-weight-display: 750;
+    --font-weight-title: 700;
+    --font-weight-body-large: 600;
+    --font-weight-body: 500;
+    --font-weight-label: 650;
+    --font-weight-caption: 550;
+    --font-weight-score: 800;
+
+    /* Role-based color tokens */
+    --color-canvas: #fff9ed;
+    --color-stage: #f6eedc;
+    --color-surface-1: #ffffff;
+    --color-surface-2: #fff3d8;
+    --color-ink-strong: #25283d;
+    --color-ink-normal: #4b5068;
+    --color-ink-muted: #71778f;
+    --color-ink-inverse: var(--color-surface-1);
+    --color-outline: #d7ccb9;
+    --color-primary: #5b6ef5;
+    --color-primary-pressed: #4658d9;
+    --color-accent: #ffb84d;
+    --color-success: #248a57;
+    --color-warning: #a96200;
+    --color-danger: #c84343;
+    --color-focus: #1769e0;
+    --color-overlay: rgb(22 24 38 / 62%);
+    --color-shadow: rgb(54 45 35 / 18%);
+    --color-selection: rgb(85 214 232 / 36%);
+
+    /* Palette sampled from the supplied paper-theatre reference images */
+    --reference-ivory: #f4e5c8;
+    --reference-ivory-soft: #fff7e8;
+    --reference-ivory-deep: #d8bf94;
+    --reference-navy: #1b2c43;
+    --reference-navy-soft: #2c435e;
+    --reference-teal: #188b9c;
+    --reference-teal-soft: #5bc8ca;
+    --reference-purple: #6d4b89;
+    --reference-purple-deep: #49325f;
+    --reference-brass: #b77b2c;
+    --reference-brass-light: #e3bd69;
+    --reference-brass-deep: #754713;
+
+    /* Four-pixel spacing grid */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+
+    --radius-sm: 0.5rem;
+    --radius-md: 0.875rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.75rem;
+    --radius-pill: 999px;
+
+    --control-sm: 2.5rem;
+    --control-md: 3rem;
+    --control-lg: 3.5rem;
+    --control-xl: 4.25rem;
+    --control-rhythm: 4.5rem;
+    --hit-area-offset: 0.5rem;
+
+    --border-width: 1px;
+    --border-width-strong: 2px;
+    --focus-ring-width: 3px;
+    --focus-ring-offset: 3px;
+
+    --shadow-1: 0 2px 6px rgb(54 45 35 / 12%);
+    --shadow-2: 0 6px 14px rgb(54 45 35 / 16%);
+    --shadow-3: 0 12px 28px rgb(32 29 36 / 22%);
+    --shadow-inset: inset 0 1px 0 rgb(255 255 255 / 68%);
+
+    --motion-instant: 80ms;
+    --motion-fast: 140ms;
+    --motion-normal: 220ms;
+    --motion-slow: 360ms;
+    --motion-scene: 520ms;
+    --motion-loop-short: 3s;
+    --motion-loop-long: 6s;
+
+    --ease-linear: linear;
+    --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+    --ease-spring-soft: cubic-bezier(0.2, 0.9, 0.25, 1.15);
+
+    --distance-xs: 2px;
+    --distance-sm: 4px;
+    --distance-md: 8px;
+    --distance-lg: 16px;
+
+    /* Components consume active tokens so motion modes stay declarative. */
+    --motion-active-instant: var(--motion-instant);
+    --motion-active-fast: var(--motion-fast);
+    --motion-active-normal: var(--motion-normal);
+    --motion-active-slow: var(--motion-slow);
+    --motion-active-scene: var(--motion-scene);
+    --motion-active-loop-short: var(--motion-loop-short);
+    --motion-active-loop-long: var(--motion-loop-long);
+    --motion-active-distance-xs: var(--distance-xs);
+    --motion-active-distance-sm: var(--distance-sm);
+    --motion-active-distance-md: var(--distance-md);
+    --motion-active-distance-lg: var(--distance-lg);
+    --motion-loop-play-state: running;
+    --motion-particle-density: 1;
+    --motion-shake-distance: var(--distance-sm);
+    --scroll-behavior: smooth;
+
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-right: env(safe-area-inset-right, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-left: env(safe-area-inset-left, 0px);
+
+    --game-logical-inline-size: 22.5rem;
+    --game-logical-block-size: 40rem;
+    --game-aspect-ratio: 9 / 16;
+    --shell-max-inline-size: 42.5rem;
+    --shell-tablet-max-block-size: 64rem;
+    --shell-gutter: clamp(var(--space-2), 3vw, var(--space-6));
+    --hud-min-block-size: 3.5rem;
+    --hud-max-block-size: 4rem;
+    --control-deck-min-block-size: 7rem;
+
+    --z-canvas: 0;
+    --z-world-overlay: 10;
+    --z-hud: 20;
+    --z-controls: 30;
+    --z-toast: 40;
+    --z-sheet: 50;
+    --z-dialog: 60;
+    --z-debug: 100;
+  }
+
+  [data-game-theme="subdivision-rocket"] {
+    --theme-primary: #7257d9;
+    --theme-primary-pressed: #583db8;
+    --theme-accent: #55d6e8;
+    --theme-surface: var(--reference-ivory);
+    --theme-surface-soft: var(--reference-ivory-soft);
+    --theme-stage: var(--reference-teal);
+    --theme-frame: var(--reference-navy);
+    --theme-frame-soft: var(--reference-navy-soft);
+    --theme-rocket: var(--reference-purple);
+    --theme-rocket-shadow: var(--reference-purple-deep);
+    --theme-metal: var(--reference-brass);
+    --theme-metal-highlight: var(--reference-brass-light);
+    --theme-metal-shadow: var(--reference-brass-deep);
+    --theme-on-primary: var(--color-ink-inverse);
+    --theme-on-accent: var(--reference-navy);
+    --theme-ink: var(--reference-navy);
+    --theme-outline: var(--reference-ivory-deep);
+    --theme-glow: rgb(85 214 232 / 30%);
+    --theme-glow-strong: rgb(85 214 232 / 48%);
+    --theme-shadow: rgb(27 44 67 / 28%);
+
+    /* Canvas reads the same role tokens; game rendering never owns color data. */
+    --rocket-paper: var(--reference-ivory);
+    --rocket-paper-light: var(--reference-ivory-soft);
+    --rocket-paper-shade: var(--reference-ivory-deep);
+    --rocket-navy: var(--reference-navy);
+    --rocket-navy-deep: var(--reference-navy-soft);
+    --rocket-sky-top: var(--reference-teal);
+    --rocket-sky-bottom: var(--reference-navy-soft);
+    --rocket-cloud: var(--color-surface-2);
+    --rocket-cloud-shade: var(--reference-ivory-deep);
+    --rocket-purple: var(--reference-purple);
+    --rocket-purple-deep: var(--reference-purple-deep);
+    --rocket-brass: var(--reference-brass);
+    --rocket-brass-light: var(--reference-brass-light);
+    --rocket-teal: var(--reference-teal);
+    --rocket-mint: var(--theme-accent);
+    --rocket-flame: var(--color-accent);
+    --rocket-flame-hot: var(--reference-brass-light);
+    --rocket-star: var(--reference-brass-light);
+    --rocket-ink: var(--reference-navy);
+    --rocket-shadow: var(--theme-shadow);
+    --rocket-miss: var(--color-danger);
+  }
+}
